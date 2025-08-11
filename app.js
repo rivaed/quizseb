@@ -162,8 +162,11 @@ const App = () => {
     setSelectedOption(null);
     setFeedback(null);
     setUserAnswers({});
-    // Reloads the page to fetch new random questions
     window.location.reload(); 
+  };
+  
+  const handleFinishQuiz = () => {
+    setShowResult(true);
   };
 
   const toggleTheme = () => {
@@ -317,9 +320,12 @@ const App = () => {
                 </div>
               )}
             </CardContent>
-            <CardFooter>
-              <Button onClick={handleNextQuestion} disabled={selectedOption === null} className="w-full">
+            <CardFooter className="flex-col">
+              <Button onClick={handleNextQuestion} disabled={selectedOption === null} className="w-full mb-2">
                 {currentQuestionIndex < quizData.length - 1 ? 'Próxima Questão' : 'Finalizar Quiz'}
+              </Button>
+              <Button onClick={handleFinishQuiz} variant="outline" className="w-full">
+                Finalizar Teste
               </Button>
             </CardFooter>
           </Card>
