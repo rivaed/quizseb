@@ -6,52 +6,65 @@ Ele aborda os principais tópicos cobrados no edital, oferecendo uma forma dinâ
 
 ## Funcionalidades
 
-- **Quiz Interativo**: Série de 100 perguntas de múltipla escolha.
-- **Temas Personalizáveis**: Alternância entre tema claro e escuro para melhor visualização.
-- **Feedback Visual e Estatístico**: Resumo final com pontuação total, gráfico de pizza com distribuição de acertos por tópico e gabarito completo com explicações.
-- **Banco de Dados em JSON**: Questões carregadas de um arquivo `quizData.json`, facilitando adição e modificação sem alterar o código.
-- **Desenvolvimento em React**: Experiência fluida e reativa para o usuário.
-
-## Tecnologias Utilizadas
-
-- **React**: Biblioteca JavaScript para construção da interface.
-- **Tailwind CSS**: Framework de CSS para estilização e design responsivo.
-- **Recharts**: Biblioteca para criação de gráficos na tela de resultados.
+- **Simulação da Prova**: Seleção aleatória de 50 questões de um banco maior, mantendo a proporção exata da prova oficial.
+- **Proporção da Prova**: Distribuição de questões respeitando a proporção **2-1-1-1-5**, garantindo foco nos tópicos mais importantes:
+  - 10 questões de **Língua Portuguesa**
+  - 5 questões de **LGPD**
+  - 5 questões de **Raciocínio Lógico**
+  - 5 questões de **Conhecimentos SEBRAE**
+  - 25 questões de **Conhecimentos Específicos**
+- **Temas Personalizáveis**: Alternância entre tema claro e escuro.
+- **Finalização a Qualquer Momento**: Botão **"Finalizar Teste"** permite encerrar o quiz antes do término e ir para a tela de resultados.
+- **Feedback Visual e Estatístico**: Pontuação total, gráfico de pizza por tópico e gabarito completo com explicações.
+- **Banco de Dados em JSON**: 100 questões armazenadas em `quizData.json`, permitindo edição sem alterar o código.
+- **Desenvolvido em React**: Experiência fluida e reativa.
 
 ## Como Usar
 
+Você pode rodar este projeto de duas maneiras: **localmente** ou **online** via GitHub Pages.
+
+### 1. Rodando Localmente
+
 Pré-requisitos: **Node.js** e **npm** instalados.
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/rivaed/quizseb.git
-    ```
-2. Acesse o diretório do projeto:
 
-   ```bash
-   cd quizseb
-   ```
-3. Instale as dependências:
+## Clone o repositório
+```bash
+git clone https://github.com/rivaed/quizseb.git
+```
 
-   ```bash
-   npm install
-   ```
-4. Inicie a aplicação:
+## Entre no diretório
+```bash
+cd quizseb
+```
 
-   ```bash
-   npm start
-   ```
+## Instale as dependências
+```bash
+npm install
+```
 
-A aplicação será executada em modo de desenvolvimento no endereço:
+## Inicie a aplicação
+```bash
+npm start
+```
+
+A aplicação será executada em:
 [http://localhost:3000](http://localhost:3000)
+
+### 2. Rodando com GitHub Pages
+
+O projeto já está configurado para execução no GitHub Pages.
+Certifique-se de que os arquivos `index.html`, `app.js` e `quizData.json` estejam na raiz do repositório.
+
+O quiz estará disponível em:
+[https://rivaed.github.io/quizseb/](https://rivaed.github.io/quizseb/)
 
 ## Contribuição
 
-Contribuições são bem-vindas!
-Se encontrar algum erro, tiver sugestões de melhoria ou quiser adicionar novas questões, abra uma **issue** ou envie um **pull request**.
+Contribuições são sempre bem-vindas!
+Se encontrar um erro, tiver sugestões de melhoria ou quiser adicionar novas questões, abra uma **issue** ou envie um **pull request**.
 
 ## Autor
-
-**rivaed**
+**[rivaed](https://github.com/rivaed)**
 
 
