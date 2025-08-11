@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Sebrae</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --background-light: #fff;
+            --foreground-light: #000;
+            --card-bg-light: #f8fafc;
+            --card-border-light: #e2e8f0;
+            --correct-bg-light: #d4edda;
+            --correct-text-light: #155724;
+            --incorrect-bg-light: #f8d7da;
+            --incorrect-text-light: #721c24;
+        }
+        .dark {
+            --background-light: #000;
+            --foreground-light: #fff;
+            --card-bg-light: #0f172a;
+            --card-border-light: #1e293b;
+            --correct-bg-light: #1f3b25;
+            --correct-text-light: #28a745;
+            --incorrect-bg-light: #4c1a20;
+            --incorrect-text-light: #dc3545;
+        }
+        body {
+            color-scheme: light dark;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--foreground-light);
+            font-family: 'Inter', sans-serif;
+        }
+        #root {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .container {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 1rem;
+          background-color: var(--background-light);
+          color: var(--foreground-light);
+          transition: background-color 0.3s, color 0.3s;
+        }
+        .card-custom {
+            background-color: var(--card-bg-light);
+            border: 1px solid var(--card-border-light);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .option-button {
+            width: 100%;
+            text-align: left;
+        }
+        .correct-feedback {
+            background-color: var(--correct-bg-light);
+            color: var(--correct-text-light);
+        }
+        .incorrect-feedback {
+            background-color: var(--incorrect-bg-light);
+            color: var(--incorrect-text-light);
+        }
+        .theme-toggle-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
