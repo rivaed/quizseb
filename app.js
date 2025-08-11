@@ -76,11 +76,56 @@ const App = () => {
   const [theme, setTheme] = useState('dark');
   const [userAnswers, setUserAnswers] = useState({});
 
-  // Carrega os dados do quiz do arquivo JSON
+  // Função para embaralhar um array
+  const shuffleArray = (array) => {
+    let newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  // Função para selecionar um número específico de questões por tópico
+  const getRandomQuiz = (allQuestions, proportions) => {
+    const groupedQuestions = allQuestions.reduce((acc, q) => {
+      if (!acc[q.topic]) {
+        acc[q.topic] = [];
+      }
+      acc[q.topic].push(q);
+      return acc;
+    }, {});
+
+    let selectedQuestions = [];
+    Object.keys(proportions).forEach(topic => {
+      const questionsForTopic = groupedQuestions[topic];
+      if (questionsForTopic) {
+        const shuffledTopicQuestions = shuffleArray(questionsForTopic);
+        selectedQuestions = selectedQuestions.concat(
+          shuffledTopicQuestions.slice(0, proportions[topic])
+        );
+      }
+    });
+
+    return shuffleArray(selectedQuestions);
+  };
+
+  // Carrega os dados do quiz do arquivo JSON e os embaralha
   useEffect(() => {
+    const proportions = {
+      "Língua Portuguesa": 10,
+      "LGPD": 5,
+      "Raciocínio Lógico": 5,
+      "Conhecimentos SEBRAE": 5,
+      "Conhecimentos Específicos": 25
+    };
+    
     fetch('/quizData.json')
       .then(response => response.json())
-      .then(data => setQuizData(data))
+      .then(data => {
+        const randomizedQuiz = getRandomQuiz(data, proportions);
+        setQuizData(randomizedQuiz);
+      })
       .catch(error => console.error('Error loading quiz data:', error));
   }, []);
 
@@ -117,6 +162,8 @@ const App = () => {
     setSelectedOption(null);
     setFeedback(null);
     setUserAnswers({});
+    // Reloads the page to fetch new random questions
+    window.location.reload(); 
   };
 
   const toggleTheme = () => {
@@ -132,11 +179,14 @@ const App = () => {
 
   const getTopicStats = () => {
     const stats = {};
+    const topics = ["Língua Portuguesa", "LGPD", "Raciocínio Lógico", "Conhecimentos SEBRAE", "Conhecimentos Específicos"];
+    
+    topics.forEach(topic => {
+      stats[topic] = { total: 0, correct: 0 };
+    });
+
     quizData.forEach(q => {
-      if (!stats[q.topic]) {
-        stats[q.topic] = { total: 0, correct: 0, percentage: 0 };
-      }
-      stats[q.topic].total += 1;
+        stats[q.topic].total += 1;
     });
 
     Object.keys(userAnswers).forEach(index => {
@@ -144,10 +194,6 @@ const App = () => {
       if (userAnswers[index] === question.answer) {
         stats[question.topic].correct += 1;
       }
-    });
-
-    Object.keys(stats).forEach(topic => {
-      stats[topic].percentage = stats[topic].total > 0 ? (stats[topic].correct / stats[topic].total) * 100 : 0;
     });
 
     return stats;
